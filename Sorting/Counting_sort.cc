@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+void Counting_sort(int a[], int n)
+{
+     int b[100] = {0};
+     for(int i = 0; i < n; i++){
+          b[a[i]]++;
+     }
+     for(int i = 1; i < 100; i++){
+          b[i] = b[i] + b[i-1];
+     }
+     int c[n + 1];
+     for(int i = n - 1; i >= 0; i--){
+          c[b[a[i]] - 1] = a[i];
+		b[a[i]] --;
+     }
+     for(int i = 0; i< n; i++){
+          a[i] = c[i];
+     }
+}
+int main()
+{
+     int t;
+     cin >> t;
+     while(t--){
+          int n;
+          cin >> n;
+          int a[n];
+          for(int i= 0; i < n; i++){
+               cin >> a[i];
+          }
+          Counting_sort(a, n);
+          for(int i = 0; i < n; i++){
+               cout << a[i] << " ";
+          }
+          cout << endl;
+     }
+     return 0;
+}
